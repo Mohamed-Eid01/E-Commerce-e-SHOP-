@@ -52,7 +52,7 @@ function Home() {
               alt="hero"
               className="w-full h-full  rounded-lg"
             />
-            <div className="absolute top-4 sm:top-8 md:top-16  left-4 sm:left-6  md:left-8 lg:left-12">
+            <div className="absolute top-16 sm:top-18 md:top-24  left-4 sm:left-6  md:left-8 lg:left-12">
               <p className="text-gray-600 text-xs sm:text-sm md:text-base mb-2">
                 YOUR ONLINE SHOP
               </p>
