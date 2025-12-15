@@ -63,23 +63,33 @@ function Cart() {
                     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between sm:justify-end gap-3 sm:gap-6 md:gap-12 w-full sm:w-auto">
                       {/* Price */}
                       <div className="flex justify-between items-center w-full sm:w-auto">
-                        <span className="text-xs text-gray-600 md:hidden font-semibold mr-2">Price:</span>
+                        <span className="text-xs text-gray-600 md:hidden font-semibold mr-2">
+                          Price:
+                        </span>
                         <p className="text-sm">${product.price}</p>
                       </div>
 
                       {/* Quantity Controls */}
                       <div className="flex justify-between items-center w-full sm:w-auto">
-                        <span className="text-xs text-gray-600 md:hidden font-semibold mr-2">Quantity:</span>
+                        <span className="text-xs text-gray-600 md:hidden font-semibold mr-2">
+                          Quantity:
+                        </span>
                         <div className="flex justify-center items-center border border-gray-300 shadow-sm rounded">
                           <button
-                            onClick={() => dispatch(decreaseQuantity(product.id))}
+                            onClick={() =>
+                              dispatch(decreaseQuantity(product.id))
+                            }
                             className="text-lg sm:text-xl font-bold px-2 sm:px-3 py-1 border-r border-gray-300 hover:bg-gray-100"
                           >
                             -
                           </button>
-                          <p className="px-3 sm:px-4 text-sm sm:text-base">{product.quantity}</p>
+                          <p className="px-3 sm:px-4 text-sm sm:text-base">
+                            {product.quantity}
+                          </p>
                           <button
-                            onClick={() => dispatch(increaseQuantity(product.id))}
+                            onClick={() =>
+                              dispatch(increaseQuantity(product.id))
+                            }
                             className="text-lg sm:text-xl px-2 sm:px-3 py-1 border-l border-gray-300 hover:bg-gray-100"
                           >
                             +
@@ -89,7 +99,9 @@ function Cart() {
 
                       {/* Subtotal */}
                       <div className="flex justify-between items-center w-full sm:w-auto">
-                        <span className="text-xs text-gray-600 md:hidden font-semibold mr-2">Subtotal:</span>
+                        <span className="text-xs text-gray-600 md:hidden font-semibold mr-2">
+                          Subtotal:
+                        </span>
                         <p className="text-sm sm:text-base font-semibold">
                           ${(product.quantity * product.price).toFixed(2)}
                         </p>
@@ -97,7 +109,9 @@ function Cart() {
 
                       {/* Remove Button */}
                       <div className="flex justify-between items-center w-full sm:w-auto">
-                        <span className="text-xs text-gray-600 md:hidden font-semibold mr-2">Remove:</span>
+                        <span className="text-xs text-gray-600 md:hidden font-semibold mr-2">
+                          Remove:
+                        </span>
                         <button
                           onClick={() => dispatch(removeFromCart(product.id))}
                           className="text-red-500 hover:text-red-700 p-2"
@@ -114,18 +128,19 @@ function Cart() {
 
             {/* Cart Summary Section */}
             <div className="w-full md:w-1/3 bg-white p-4 sm:p-6 rounded-lg shadow-md border border-gray-300 h-fit sticky top-4">
-              <h3 className="text-base sm:text-lg font-semibold mb-5">Cart Total</h3>
+              <h3 className="text-base sm:text-lg font-semibold mb-5">
+                Cart Total
+              </h3>
 
               <div className="flex justify-between mb-5 pb-3 border-b border-gray-300">
                 <span className="text-sm">Total Items:</span>
                 <span className="font-semibold">{cart.totalQuantity}</span>
               </div>
 
-              <div className="mb-4 pb-4 border-b border-gray-300">
+              {/* <div className="mb-4 pb-4 border-b border-gray-300">
                 <p className="text-sm mb-2">Shipping:</p>
                 <p className="text-sm ml-2 mb-2">
-                  Shipping to:{" "}
-                  <span className="font-bold">{address}</span>
+                  Shipping to: <span className="font-bold">{address}</span>
                 </p>
                 <button
                   onClick={() => setIsModalOpen(true)}
@@ -133,11 +148,13 @@ function Cart() {
                 >
                   Change address
                 </button>
-              </div>
+              </div> */}
 
               <div className="flex justify-between mb-6 text-lg font-bold">
                 <span>Total Price:</span>
-                <span className="text-red-600">${cart.totalPrice.toFixed(2)}</span>
+                <span className="text-red-600">
+                  ${cart.totalPrice.toFixed(2)}
+                </span>
               </div>
 
               <button
@@ -158,7 +175,11 @@ function Cart() {
         </div>
       ) : (
         <div className="flex flex-col justify-center items-center min-h-screen px-4">
-          <img src={EmptyCart} alt="Empty cart" className="w-full max-w-md h-auto" />
+          <img
+            src={EmptyCart}
+            alt="Empty cart"
+            className="w-full max-w-md h-auto"
+          />
           <p className="text-lg text-gray-600 mt-4">Your cart is empty</p>
           <button
             onClick={() => navigate("/")}

@@ -27,7 +27,7 @@ function Footer() {
             </li>
             <li>
               <Link to="/contact" className="hover:underline">
-                Contack
+                Contact
               </Link>
             </li>
             <li>
@@ -72,12 +72,12 @@ function Footer() {
         <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
           <p>&copy; 2025 E-Shop All Rights Reserved.</p>
           <div className="flex space-x-4 mt-4 md:mt-0">
-            <a herf="" className="hover:underline">
+            <Link to='/privacy' className="hover:underline">
               Privacy Policy
-            </a>
-            <a herf="" className="hover:underline">
+            </Link>
+            <Link to="/terms" className="hover:underline">
               Terms & Condition
-            </a>
+            </Link>
           </div>
         </div>
       </div>

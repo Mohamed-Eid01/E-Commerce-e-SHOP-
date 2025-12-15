@@ -1,43 +1,70 @@
-import { FaStar } from "react-icons/fa"
+import { FaStar } from "react-icons/fa";
 import { addToCart } from "../redux/cartSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
+function ProductCard({ product }) {
+  const dispatch = useDispatch();
 
-function ProductCard({product}) {
-    const dispatch=useDispatch();
-    function handleAddToCart(e,product){
-e.stopPropagation();
-e.preventDefault();
-dispatch(addToCart(product))
-alert('Product added to cart successfully')
-    }
-    return (
-      <Link to={`/product/${product.id}`}>
-        <div className="bg-white p-4 shadow rounded relative border-gray-50 transform transition-transform duration-300 hover:scale-105">
+  function handleAddToCart(e, product) {
+    e.stopPropagation();
+    e.preventDefault();
+    dispatch(addToCart(product));
+    toast("Product added to cart", {
+      className: "custom-red-toast",
+    });
+  }
+
+  return (
+    <Link to={`/product/${product.id}`}>
+      <div className="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
+        {/* Image */}
+        <div className="w-full h-52 bg-gray-50 flex items-center justify-center p-4">
           <img
             src={product.image}
-            alt="product image"
-            className="w-full h-48 object-contain mb-4"
+            alt={product.name}
+            className="h-full object-contain"
           />
-          <h3 className="text-lg font-semibold">{product.name}</h3>
-          <p className="text-gray-500">${product.price}</p>
-          <div className="flex items-center mt-2">
+        </div>
+
+        {/* Content */}
+        <div className="p-4 space-y-2">
+          {/* Category */}
+          <p className="text-xs text-gray-400 uppercase tracking-wide">
+            {product.category || "General"}
+          </p>
+
+          {/* Name */}
+          <h3 className="text-lg font-semibold text-gray-800 line-clamp-2">
+            {product.name}
+          </h3>
+
+          {/* Rating */}
+          <div className="flex items-center gap-1">
             <FaStar className="text-yellow-500" />
             <FaStar className="text-yellow-500" />
             <FaStar className="text-yellow-500" />
             <FaStar className="text-yellow-500" />
+            <span className="text-sm text-gray-500 ml-1">(4.0)</span>
           </div>
-          <div
-            className="absolute bottom-4 right-2 flex items-center justify-center w-8 h-8 bg-red-600 group text-white text-sm-center rounded-full hover:w-32 hover:bg-gray-700 transition-all"
-            onClick={(e) => handleAddToCart(e, product)}
-          >
-            <span className="group-hover:hidden">+</span>
-            <span className="hidden group-hover:block">Add to cart</span>
+
+          {/* Price */}
+          <div className="flex items-center justify-between mt-3">
+            <p className="text-xl font-bold text-red-600">${product.price}</p>
+
+            {/* Add to cart button */}
+            <button
+              onClick={(e) => handleAddToCart(e, product)}
+              className="px-4 py-1.5 text-sm bg-red-600 text-white rounded-full hover:bg-red-700 transition"
+            >
+              Add
+            </button>
           </div>
         </div>
-      </Link>
-    );
+      </div>
+    </Link>
+  );
 }
 
 export default ProductCard;

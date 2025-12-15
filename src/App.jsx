@@ -12,6 +12,9 @@ import FilterData from "./pages/FilterData";
 import ProductDetails from "./pages/ProductDetails";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import { ToastContainer } from "react-toastify";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsConditions from "./pages/TermsCondition";
 function App() {
   const [order, setOrder] = useState(null);
 
@@ -28,8 +31,11 @@ function App() {
         <Route path="/order" element={<Order order={order} />} />
         <Route path="/filter-data" element={<FilterData />} />
         <Route path="/product/:id" element={<ProductDetails />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/terms" element={<TermsConditions />} />
       </Routes>
       <Footer />
+      <ToastContainer position="top-right" autoClose={1000} />
     </BrowserRouter>
   );
 }

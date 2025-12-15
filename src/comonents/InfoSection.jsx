@@ -29,17 +29,25 @@ function InfoSection() {
       description: "We offer competitive prices on all products",
     },
   ];
+
   return (
-    <div className="bg-white pb-8 pt-12">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+    <div className="bg-white py-12">
+      <div className="container mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
         {infoItems.map((item, index) => (
           <div
-            className="flex flex-col items-center text-center p-4 border-gray-50 rounded-lg shadow-md transform transition-transform duration-300 hover:scale-105 cursor-pointer"
             key={index}
+            className="flex flex-col items-center text-center p-6 rounded-lg border border-gray-100 shadow-md 
+            transition-transform duration-300 hover:scale-105"
           >
             {item.icon}
-            <h3 className="mt-4 text-x1 font-semibold">{item.title}</h3>
-            <p className="mt-2 text-gray-600">{item.description}</p>
+
+            <h3 className="mt-4 text-lg font-semibold text-gray-800">
+              {item.title}
+            </h3>
+
+            <p className="mt-2 text-sm text-gray-600 leading-relaxed">
+              {item.description}
+            </p>
           </div>
         ))}
       </div>

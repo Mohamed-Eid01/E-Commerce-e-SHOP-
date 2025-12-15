@@ -3,6 +3,7 @@ import { FaCarSide, FaQuestionCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { addToCart } from "../redux/cartSlice"; // ★ لازم تضيف ده
+import { toast } from "react-toastify";
 
 function ProductDetails() {
   const { id } = useParams();
@@ -34,12 +35,13 @@ function ProductDetails() {
         quantity: quantity,
       })
     );
-
-    alert("Product added to cart successfully!");
+toast("Product added to cart", {
+  className: "custom-red-toast",
+});
   }
 
   return (
-    <div className="container mx-auto py-8 px-4 md:px-16 lg:px-24">
+    <div className="container mx-auto py-6 px-2 md:px-16 lg:px-24">
       <div className="flex flex-col md:flex-row gap-x-16">
         {/* Product Image */}
         <div className="md:w-1/2 py-4 shadow-md md:px-8 h-96 flex justify-center">
@@ -51,43 +53,63 @@ function ProductDetails() {
         </div>
 
         {/* Product Details */}
-        <div className="md:w-1/2 p-4 shadow-md md:p-16 flex flex-col gap-y-2">
-          <h2 className="text-3xl font-semibold text-gray-800 mb-4">
-            {product.name}
-          </h2>
+        <div className="md:w-1/2 p-3 shadow-md md:p-8 flex flex-col gap-y-4">
+          {/* Category */}
+          <p className="text-sm text-gray-500 uppercase tracking-wide">
+            {product.category || "Uncategorized"}
+          </p>
 
-          <p className="text-xl font-semibold text-gray-800 mb-4">
+          {/* Product Name */}
+          <h2 className="text-3xl font-bold text-gray-800">{product.name}</h2>
+
+          {/* Price */}
+          <p className="text-2xl font-semibold text-red-600">
             ${product.price}
           </p>
 
-          {/* Quantity & Add */}
-          <div className="flex items-center mb-4 gap-x-2">
+          {/* Description */}
+          <p className="text-gray-600 leading-relaxed">
+            {product.description || "Product description will go here."}
+          </p>
+
+          {/* Stock */}
+          <p className="text-gray-700">
+            <span className="font-semibold">In Stock: 30</span> {product.stock}
+          </p>
+
+          {/* Add to Cart */}
+          <div className="mt-2">
             <button
-              className="bg-red-600 text-white py-1.5 px-4 hover:bg-red-800"
+              className="w-full bg-red-600 text-white py-2 px-4 hover:bg-red-800 rounded-lg transition"
               onClick={handleAddToCart}
             >
               Add to Cart
             </button>
           </div>
 
-          {/* Other Info */}
-          <div className="flex flex-col gap-y-4 mt-4">
-            <p className="flex items-center">
-              <FaCarSide className="mr-2" />
-              Delivery & Return
-            </p>
-            <p className="flex items-center">
-              <FaQuestionCircle className="mr-2" />
-              Ask a Question
-            </p>
-          </div>
+          {/* Extra Info */}
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* Delivery */}
+            <div className="flex items-start gap-3 p-4 border border-gray-200 rounded-lg">
+              <FaCarSide className="text-red-600 text-2xl mt-1" />
+              <div>
+                <p className="font-semibold text-gray-800">Fast Delivery</p>
+                <p className="text-sm text-gray-600">
+                  Free shipping within 2–5 business days
+                </p>
+              </div>
+            </div>
 
-          {/* Description */}
-          <div className="mt-8">
-            <h3 className="text-lg font-semibold mb-2">Product Description</h3>
-            <p className="text-gray-600">
-              {product.description || "Product description will go here."}
-            </p>
+            {/* Support */}
+            <div className="flex items-start gap-3 p-4 border border-gray-200 rounded-lg">
+              <FaQuestionCircle className="text-red-600 text-2xl mt-1" />
+              <div>
+                <p className="font-semibold text-gray-800">Need Help?</p>
+                <p className="text-sm text-gray-600">
+                  Contact our support team anytime
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

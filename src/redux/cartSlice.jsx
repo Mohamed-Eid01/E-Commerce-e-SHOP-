@@ -84,10 +84,6 @@ const cartSlice = createSlice({
           (sum, i) => sum + i.totalPrice,
           0
         );
-      } else {
-        alert(
-          "Quantity cannot be less than 1, To remove the item, please use the delete option."
-        );
       }
     },
   },

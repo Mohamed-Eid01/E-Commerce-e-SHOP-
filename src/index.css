@@ -1,1 +1,5 @@
 @import "tailwindcss";
+.custom-red-toast {
+  background-color: #dc2626 !important;
+  color: white;
+}
