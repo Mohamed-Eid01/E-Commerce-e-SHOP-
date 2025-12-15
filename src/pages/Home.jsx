@@ -1,4 +1,5 @@
-import { Categories, mockData } from "../assets/mockData";
+import {  mockData } from "../assets/mockData";
+import Categories from "../comonents/CategorySection"
 import heroImg from "../assets/Images/hero-page.png";
 import InfoSection from "../comonents/InfoSection";
 import CategorySection from "../comonents/CategorySection";

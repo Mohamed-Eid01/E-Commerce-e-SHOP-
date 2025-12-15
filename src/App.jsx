@@ -15,6 +15,7 @@ import Contact from "./pages/Contact";
 import { ToastContainer } from "react-toastify";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsConditions from "./pages/TermsCondition";
+import CategoryPage from "./pages/CategoryPage";
 function App() {
   const [order, setOrder] = useState(null);
 
@@ -33,6 +34,7 @@ function App() {
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<TermsConditions />} />
+        <Route path="/category/:category" element={<CategoryPage />} />
       </Routes>
       <Footer />
       <ToastContainer position="top-right" autoClose={1000} />

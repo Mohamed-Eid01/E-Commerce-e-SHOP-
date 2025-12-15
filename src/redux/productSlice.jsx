@@ -5,7 +5,8 @@ import { MdFilterDrama } from "react-icons/md";
 const initialState = {
 products:[],
 searchTerm:'',
-filterData:[]
+filterData:[],
+category:''
 }
 
 const productSlice = createSlice({
