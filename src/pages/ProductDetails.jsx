@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { FaCarSide, FaQuestionCircle } from "react-icons/fa";
+import { FaCarSide, FaQuestionCircle, FaStar } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { addToCart } from "../redux/cartSlice"; // ★ لازم تضيف ده
 import { toast } from "react-toastify";
+import StartRating from "../comonents/StartRating";
 
 function ProductDetails() {
   const { id } = useParams();
@@ -72,6 +73,8 @@ toast("Product added to cart", {
             {product.description || "Product description will go here."}
           </p>
 
+          {/* Rating */}
+            <StartRating maxRating={5} size={24}/>
           {/* Stock */}
           <p className="text-gray-700">
             <span className="font-semibold">In Stock: 30</span> {product.stock}

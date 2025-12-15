@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 
 function Cart() {
   const cart = useSelector((state) => state.cart);
-  // const [address, setAddress] = useState("main street, 0012");
+  const [address, setAddress] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();

@@ -10,7 +10,7 @@ function Login({openSignUp}) {
           <input
             placeholder="Enter Email"
             type="email"
-            className="w-full px-3 py-2 border rounded-sm focus:outline-none focus:ring-1 focus:ring-red-600"
+            className="w-full px-3 py-2 border border-gray-300 shadow-lg outline-none rounded-sm focus:outline-none focus:ring-1 focus:ring-red-600"
           />
         </div>
 
@@ -19,7 +19,7 @@ function Login({openSignUp}) {
           <label className="block text-gray-700 mb-1">Password</label>
           <input
             type="password"
-            className="w-full px-3 py-2 border rounded-sm focus:outline-none focus:ring-1 focus:ring-red-600"
+            className="w-full px-3 py-2 border rounded-sm  border-gray-300 shadow-lg outline-none focus:ring-1 focus:ring-red-600"
             placeholder="Enter the Password"
           />
         </div>
@@ -27,7 +27,7 @@ function Login({openSignUp}) {
         {/* Remember + Forget */}
         <div className="mb-4 flex items-center justify-between">
           <label className="flex items-center">
-            <input type="checkbox" className="form-checkbox" />
+            <input type="checkbox" className="form-checkbox  border-gray-300 shadow-lg outline-none" />
             <span className="ml-2 text-gray-700">Remember Me</span>
           </label>
 
