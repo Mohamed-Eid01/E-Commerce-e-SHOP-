@@ -36,9 +36,7 @@ function ProductDetails() {
         quantity: quantity,
       })
     );
-toast("Product added to cart", {
-  className: "custom-red-toast",
-});
+toast.success("Product added to cart");
   }
 
   return (

@@ -11,9 +11,7 @@ function ProductCard({ product }) {
     e.stopPropagation();
     e.preventDefault();
     dispatch(addToCart(product));
-    toast("Product added to cart", {
-      className: "custom-red-toast",
-    });
+    toast.success("Product added to cart");
   }
 
   return (

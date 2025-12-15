@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 const initialState = {
   products: [],
@@ -84,6 +85,8 @@ const cartSlice = createSlice({
           (sum, i) => sum + i.totalPrice,
           0
         );
+      }else{
+            toast.warning("Only 1 item left. To remove it, click 'Remove");
       }
     },
   },
