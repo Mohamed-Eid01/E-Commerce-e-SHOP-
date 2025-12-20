@@ -7,22 +7,31 @@ import { toast } from "react-toastify";
 function ProductCard({ product }) {
   const dispatch = useDispatch();
 
-  function handleAddToCart(e, product) {
-    e.stopPropagation();
+  const handleAddToCart = (e) => {
     e.preventDefault();
-    dispatch(addToCart(product));
+    e.stopPropagation();
+
+    dispatch(
+      addToCart({
+        id: product._id,
+        name: product.name,
+        price: product.price,
+        image: product.image,
+        quantity: 1,
+      })
+    );
     toast.success("Product added to cart");
-  }
+  };
 
   return (
-    <Link to={`/product/${product.id}`}>
+    <Link to={`/product/${product._id}`}>
       <div className="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
         {/* Image */}
-        <div className="w-full h-52 bg-gray-50 flex items-center justify-center p-4">
+        <div className="w-full h-52 bg-gray-50 flex items-center justify-center ">
           <img
             src={product.image}
             alt={product.name}
-            className="h-full object-contain"
+            className="h-full object-cover w-full"
           />
         </div>
 
@@ -53,8 +62,8 @@ function ProductCard({ product }) {
 
             {/* Add to cart button */}
             <button
-              onClick={(e) => handleAddToCart(e, product)}
-              className="px-4 py-1.5 text-sm bg-red-600 text-white rounded-full hover:bg-red-700 transition"
+              onClick={handleAddToCart}
+              className="cursor-pointer px-4 py-1.5 text-sm bg-red-600 text-white rounded-full hover:bg-red-700 transition"
             >
               Add
             </button>

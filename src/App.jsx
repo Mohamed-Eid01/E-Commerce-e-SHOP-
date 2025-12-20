@@ -6,7 +6,7 @@ import Shop from "./pages/Shop";
 import Cart from "./pages/Cart";
 import { IoBagCheckOutline } from "react-icons/io5";
 import Checkout from "./pages/Checkout";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Order from "./pages/Order";
 import FilterData from "./pages/FilterData";
 import ProductDetails from "./pages/ProductDetails";
@@ -16,8 +16,17 @@ import { ToastContainer } from "react-toastify";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsConditions from "./pages/TermsCondition";
 import CategoryPage from "./pages/CategoryPage";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import { useDispatch } from "react-redux";
+import { fetchProducts } from "./redux/api/productApi";
 function App() {
   const [order, setOrder] = useState(null);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+      dispatch(fetchProducts());
+    }, [dispatch]);
 
   return (
     <BrowserRouter>
@@ -35,6 +44,8 @@ function App() {
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/terms" element={<TermsConditions />} />
         <Route path="/category/:category" element={<CategoryPage />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
       <Footer />
       <ToastContainer position="top-right" autoClose={1000} />

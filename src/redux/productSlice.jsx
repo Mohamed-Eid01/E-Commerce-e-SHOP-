@@ -1,13 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { MdFilterDrama } from "react-icons/md";
-
 
 const initialState = {
-products:[],
-searchTerm:'',
-filterData:[],
-category:''
-}
+  products: [],
+  filterData: [],
+  searchTerm: "",
+};
 
 const productSlice = createSlice({
   name: "product",
@@ -15,15 +12,18 @@ const productSlice = createSlice({
   reducers: {
     setProducts(state, action) {
       state.products = action.payload;
+      state.filterData = action.payload;
     },
-    setSearchTerm(state,action){
-      state.searchTerm=action.payload
-      state.filterData =state.products.filter(product=>
-        product.name.toLowerCase().includes(state.searchTerm.toLowerCase())
-      )
-    }
+
+    setSearchTerm(state, action) {
+      state.searchTerm = action.payload;
+
+      state.filterData = state.products.filter((product) =>
+        product.name.toLowerCase().includes(action.payload.toLowerCase())
+      );
+    },
   },
 });
 
 export const { setProducts, setSearchTerm } = productSlice.actions;
-export default productSlice.reducer
+export default productSlice.reducer;

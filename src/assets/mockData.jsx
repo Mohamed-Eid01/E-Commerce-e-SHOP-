@@ -1,103 +1,150 @@
-import Image1 from "./Images/bag.jpg";
-import Image2 from "./Images/sandle.jpg";
-import Image3 from "./Images/watch.jpg";
-import Image4 from "./Images/cap.jpg";
-import Image5 from "./Images/boot1.jpg";
-import Image6 from "./Images/dove.jpg";
-import Image7 from "./Images/headphone.jpg";
-import Image8 from "./Images/robot.jpg";
-import Image9 from "./Images/wwatch.jpg";
-import Image10 from "./Images/shirt.jpg";
-
 export const mockData = [
   {
-    id: 1,
-    image: Image9,
+    _id: "1",
+    name: "Bag",
     description: "High-quality bag for everyday use.",
-    name: "bag",
     price: 29.99,
-    category: "men",
+    discountPrice: 25.99,
     stock: 50,
+    images: [
+      "https://images.unsplash.com/photo-1622560480654-d96214fdc887?q=80&w=388&auto=format&fit=crop",
+    ],
+    categoryId: {
+      _id: "cat-men",
+      name: "men",
+    },
   },
   {
-    id: 2,
-    image: Image8,
-    description: "Durable and stylish Sandle for your needs.",
+    _id: "2",
     name: "Sandle",
+    description: "Durable and stylish Sandle for your needs.",
     price: 39.99,
-    category: "men",
+    discountPrice: 35.99,
     stock: 40,
+    images: [
+      "https://images.unsplash.com/photo-1677922336239-d6978d0d2af2?q=80&w=435&auto=format&fit=crop",
+    ],
+    categoryId: {
+      _id: "cat-men",
+      name: "men",
+    },
   },
   {
-    id: 3,
-    image: Image7,
-    description: "Product 3 description.",
-    name: "Product 3",
+    _id: "3",
+    name: "Watch",
+    description: "Watch with excellent performance and features.",
     price: 19.99,
-    category: "men",
+    discountPrice: 17.99,
     stock: 30,
+    images: [
+      "https://images.unsplash.com/photo-1547996160-81dfa63595aa?q=80&w=387&auto=format&fit=crop",
+    ],
+    categoryId: {
+      _id: "cat-men",
+      name: "men",
+    },
   },
   {
-    id: 4,
-    image: Image6,
-    description: "Product 4 description.",
-    name: "Product 4",
+    _id: "4",
+    name: "Cap",
+    description: "Stylish and functional Cap for daily use.",
     price: 49.99,
-    category: "men",
-    stock: 25,
-  },
-  {
-    id: 5,
-    image: Image10,
-    description: "Product 5 description.",
-    name: "Product 5",
-    price: 49.99,
-    category: "kids",
+    discountPrice: 44.99,
     stock: 20,
+    images: [
+      "https://images.unsplash.com/photo-1560774358-d727658f457c?q=80&w=464&auto=format&fit=crop",
+    ],
+    categoryId: {
+      _id: "cat-men",
+      name: "men",
+    },
   },
   {
-    id: 6,
-    image: Image4,
-    description: "Product 6 description.",
-    name: "Product 6",
+    _id: "5",
+    name: "boot",
+    description: "Reliable boot with top-notch quality.",
     price: 49.99,
-    category: "kids",
+    discountPrice: 42.99,
     stock: 15,
+    images: [
+      "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?q=80&w=387&auto=format&fit=crop",
+    ],
+    categoryId: {
+      _id: "cat-kids",
+      name: "kids",
+    },
   },
   {
-    id: 7,
-    image: Image5,
-    description: "Product 7 description.",
-    name: "Product 7",
+    _id: "6",
+    name: "Dove",
+    description: "Dove perfect for everyday activities.",
     price: 49.99,
-    category: "kids",
-    stock: 20,
+    discountPrice: 40.99,
+    stock: 25,
+    images: ["https://assets.unileversolutions.com/v1/130942459.jpg"],
+    categoryId: {
+      _id: "cat-kids",
+      name: "kids",
+    },
   },
   {
-    id: 8,
-    image: Image3,
-    description: "Product 8 description.",
-    name: "Product 8",
+    _id: "7",
+    name: "Headphone",
+    description: "High-end Headphone with amazing design.",
     price: 49.99,
-    category: "women",
+    discountPrice: 45.99,
     stock: 10,
+    images: [
+      "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?q=80&w=388&auto=format&fit=crop",
+    ],
+    categoryId: {
+      _id: "cat-kids",
+      name: "kids",
+    },
   },
   {
-    id: 9,
-    image: Image2,
-    description: "Product 9 description.",
-    name: "Product 9",
+    _id: "8",
+    name: "Robot",
+    description: "Robot crafted for style and durability.",
     price: 49.99,
-    category: "women",
+    discountPrice: 47.99,
+    stock: 12,
+    images: [
+      "https://images.unsplash.com/photo-1589254065909-b7086229d08c?q=80&w=387&auto=format&fit=crop",
+    ],
+    categoryId: {
+      _id: "cat-women",
+      name: "women",
+    },
+  },
+  {
+    _id: "9",
+    name: "Hand Watch",
+    description: "Hand Watch with modern look and features.",
+    price: 49.99,
+    discountPrice: 48.99,
     stock: 18,
+    images: [
+      "https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?q=80&w=464&auto=format&fit=crop",
+    ],
+    categoryId: {
+      _id: "cat-women",
+      name: "women",
+    },
   },
   {
-    id: 10,
-    image: Image1,
-    description: "Product 10 description.",
-    name: "Product 10",
+    _id: "10",
+    name: "T-shirt",
+    description: "Classic T-shirt for everyday use.",
     price: 49.99,
-    category: "women",
+    discountPrice: 49.0,
     stock: 20,
+    images: [
+      "https://images.unsplash.com/photo-1759572095384-1a7e646d0d4f?q=80&w=327&auto=format&fit=crop",
+    ],
+    categoryId: {
+      _id: "cat-women",
+      name: "women",
+    },
   },
 ];

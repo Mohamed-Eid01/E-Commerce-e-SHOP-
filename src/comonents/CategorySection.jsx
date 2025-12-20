@@ -32,7 +32,7 @@ function CategorySection() {
             </h3>
             <button
               onClick={() => navigate(`/category/${category.title}`)}
-              className="bg-red-600 text-white font-bold px-4 py-2 rounded-lg text-md hover:bg-red-800 transition"
+              className=" cursor-pointer bg-red-600 text-white font-bold px-4 py-2 rounded-lg text-md hover:bg-red-800 transition"
             >
               View All
             </button>

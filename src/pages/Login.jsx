@@ -1,16 +1,101 @@
-function Login({openSignUp}) {
+import { useState } from "react";
+
+function Login({ openSignUp }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    try {
+      const res = await fetch("http://localhost:8008/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || "Login failed");
+      }
+
+      // ✅ خزّن التوكن
+      localStorage.setItem("token", data.token);
+
+      // ✅ استخرج userId من التوكن أو من data.user
+      let userId = null;
+      if (data.user && (data.user._id || data.user.id)) {
+        userId = data.user._id || data.user.id;
+      } else {
+        // استخرج userId من التوكن
+        try {
+          if (data.token && data.token.split(".").length === 3) {
+            const payload = JSON.parse(atob(data.token.split(".")[1]));
+            userId =
+              payload?.id ||
+              payload?._id ||
+              payload?.userId ||
+              payload?.sub ||
+              payload?.user_id;
+          }
+        } catch (err) {
+          console.warn("Failed to extract userId from token:", err);
+        }
+      }
+
+      // ✅ خزّن بيانات المستخدم
+      if (userId) {
+        const userData = data.user
+          ? { ...data.user, token: data.token }
+          : {
+              _id: userId,
+              id: userId,
+              token: data.token,
+              email: data.email || email,
+            };
+        localStorage.setItem("user", JSON.stringify(userData));
+      }
+
+      // ✅ اقفل المودال واعمل ريفريش
+      window.location.reload();
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className="max-w-md mx-auto bg-white  p-8 rounded-lg">
+    <div className="max-w-md mx-auto bg-white p-8 rounded-lg">
       <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
 
-      <form>
+      {error && (
+        <div className="mb-4 text-sm text-red-600 bg-red-100 p-2 rounded">
+          {error}
+        </div>
+      )}
+
+      <form onSubmit={handleSubmit}>
         {/* Email */}
         <div className="mb-4">
           <label className="block text-gray-700 mb-1">Email</label>
           <input
-            placeholder="Enter Email"
             type="email"
-            className="w-full px-3 py-2 border border-gray-300 shadow-lg outline-none rounded-sm focus:outline-none focus:ring-1 focus:ring-red-600"
+            placeholder="Enter Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            className="w-full px-3 py-2 border border-gray-300 shadow-lg rounded-sm focus:ring-1 focus:ring-red-600 outline-none"
           />
         </div>
 
@@ -19,35 +104,40 @@ function Login({openSignUp}) {
           <label className="block text-gray-700 mb-1">Password</label>
           <input
             type="password"
-            className="w-full px-3 py-2 border rounded-sm  border-gray-300 shadow-lg outline-none focus:ring-1 focus:ring-red-600"
             placeholder="Enter the Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            className="w-full px-3 py-2 border border-gray-300 shadow-lg rounded-sm focus:ring-1 focus:ring-red-600 outline-none"
           />
         </div>
 
         {/* Remember + Forget */}
         <div className="mb-4 flex items-center justify-between">
           <label className="flex items-center">
-            <input type="checkbox" className="form-checkbox  border-gray-300 shadow-lg outline-none" />
-            <span className="ml-2 text-gray-700">Remember Me</span>
+            <input type="checkbox" className="mr-2" />
+            <span className="text-gray-700">Remember Me</span>
           </label>
 
-          <a href="#" className="text-red-700 hover:underline text-sm">
+          <button
+            type="button"
+            className="text-red-700 hover:underline text-sm"
+          >
             Forgot Password?
-          </a>
+          </button>
         </div>
 
         {/* Login Button */}
-        <div className="mb-4">
-          <button
-            type="submit"
-            className="w-full bg-red-600 text-white py-2 rounded-sm hover:bg-red-700 transition"
-          >
-            Login
-          </button>
-        </div>
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full bg-red-600 text-white py-2 rounded-sm hover:bg-red-700 transition disabled:opacity-60"
+        >
+          {loading ? "Logging in..." : "Login"}
+        </button>
       </form>
 
-      {/* Signup Link */}
+      {/* Signup */}
       <div className="text-center mt-4">
         <span className="text-gray-700">Don't have an account? </span>
         <button

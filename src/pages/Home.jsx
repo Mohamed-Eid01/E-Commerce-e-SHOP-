@@ -1,24 +1,26 @@
-import {  mockData } from "../assets/mockData";
 import Categories from "../comonents/CategorySection"
 import heroImg from "../assets/Images/hero-page.png";
 import InfoSection from "../comonents/InfoSection";
 import CategorySection from "../comonents/CategorySection";
-import { setProducts } from "../redux/productSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import {  useDispatch, useSelector } from "react-redux";
 import Product from "../comonents/ProductCard";
 import ProductCard from "../comonents/ProductCard";
 import Shop from "./Shop";
 import ArrowScroll from "../comonents/ArrowScroll";
 import { Link } from "react-router-dom";
 import sidehero from "../assets/Images/sidehero.png";
+import { useEffect } from "react";
+import { fetchProducts } from "../redux/api/productApi";
 
 function Home() {
+  const products = useSelector((state) => state.product.products);
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.product);
+
   useEffect(() => {
-    dispatch(setProducts(mockData));
-  }, []);
+    dispatch(fetchProducts());
+  }, [dispatch]);
+
+
   return (
     <div>
       <div className="bg-white mt-2 px-4 md:px-16 lg:px-24">
@@ -64,7 +66,7 @@ function Home() {
                 MILLIONS+ PRODUCTS
               </p>
               <Link to="/shop">
-                <button className="bg-red-600 px-6 sm:px-8 py-1.5 sm:py-2 mt-4 text-white rounded-lg hover:bg-red-700 transform transition-transform duration-300 hover:scale-105 text-sm sm:text-base md:text-lg">
+                <button className=" cursor-pointer bg-red-600 px-6 sm:px-8 py-1.5 sm:py-2 mt-4 text-white rounded-lg hover:bg-red-700 transform transition-transform duration-300 hover:scale-105 text-sm sm:text-base md:text-lg">
                   SHOP NOW
                 </button>
               </Link>
@@ -77,8 +79,8 @@ function Home() {
         <div className="container mx-auto py-12">
           <h2 className="text-2xl font-bold mb-6 text-center">Top Products</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 cursor-pointer">
-            {products.products.map((product, index) => (
-              <ProductCard product={product} key={index} />
+            {products.map((product) => (
+              <ProductCard product={product} key={product._id} />
             ))}
           </div>
         </div>

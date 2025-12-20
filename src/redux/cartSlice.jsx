@@ -11,6 +11,13 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+
+    setCart(state, action) {
+  state.products = action.payload.products || [];
+  state.totalQuantity = action.payload.totalQuantity || 0;
+  state.totalPrice = action.payload.totalPrice || 0;
+},
+
     addToCart(state, action) {
       const newItem = action.payload;
       const existingItem = state.products.find(
@@ -31,7 +38,6 @@ const cartSlice = createSlice({
         });
       }
 
-      // إعادة حساب totalQuantity و totalPrice دائمًا من المنتجات
       state.totalQuantity = state.products.reduce(
         (sum, item) => sum + item.quantity,
         0
@@ -92,6 +98,11 @@ const cartSlice = createSlice({
   },
 });
 
-export const { removeFromCart, addToCart, decreaseQuantity, increaseQuantity } =
-  cartSlice.actions;
+export const {
+  removeFromCart,
+  addToCart,
+  decreaseQuantity,
+  increaseQuantity,
+  setCart,
+} = cartSlice.actions;
 export default cartSlice.reducer;
