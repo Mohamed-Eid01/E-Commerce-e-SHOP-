@@ -30,33 +30,25 @@ function Register({ openLogin }) {
     setLoading(true); 
 
     try {
-      const res = await fetch("http://localhost:8008/api/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          password: formData.password,
-        }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.message || "Registration failed");
-      }
-
-      setSuccess("Account created successfully");
-      setFormData({
-        name: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-      });
+      // Mock Registration Success
+      setSuccess("Account created successfully! You can now login.");
+      setError("");
+      
+      setTimeout(() => {
+        setFormData({
+          name: "",
+          email: "",
+          password: "",
+          confirmPassword: "",
+        });
+        // Optionally switch to login view
+        if (openLogin) {
+          openLogin();
+        }
+      }, 1500);
     } catch (err) {
-      setError(err.message);
+      console.error(err);
+      setError("An unexpected error occurred");
     } finally {
       setLoading(false);
     }

@@ -6,6 +6,7 @@ export const mockData = [
     price: 29.99,
     discountPrice: 25.99,
     stock: 50,
+    image: "https://images.unsplash.com/photo-1622560480654-d96214fdc887?q=80&w=388&auto=format&fit=crop",
     images: [
       "https://images.unsplash.com/photo-1622560480654-d96214fdc887?q=80&w=388&auto=format&fit=crop",
     ],
@@ -21,6 +22,7 @@ export const mockData = [
     price: 39.99,
     discountPrice: 35.99,
     stock: 40,
+    image: "https://images.unsplash.com/photo-1677922336239-d6978d0d2af2?q=80&w=435&auto=format&fit=crop",
     images: [
       "https://images.unsplash.com/photo-1677922336239-d6978d0d2af2?q=80&w=435&auto=format&fit=crop",
     ],
@@ -36,6 +38,7 @@ export const mockData = [
     price: 19.99,
     discountPrice: 17.99,
     stock: 30,
+    image: "https://images.unsplash.com/photo-1547996160-81dfa63595aa?q=80&w=387&auto=format&fit=crop",
     images: [
       "https://images.unsplash.com/photo-1547996160-81dfa63595aa?q=80&w=387&auto=format&fit=crop",
     ],
@@ -51,6 +54,7 @@ export const mockData = [
     price: 49.99,
     discountPrice: 44.99,
     stock: 20,
+    image: "https://images.unsplash.com/photo-1560774358-d727658f457c?q=80&w=464&auto=format&fit=crop",
     images: [
       "https://images.unsplash.com/photo-1560774358-d727658f457c?q=80&w=464&auto=format&fit=crop",
     ],
@@ -66,6 +70,7 @@ export const mockData = [
     price: 49.99,
     discountPrice: 42.99,
     stock: 15,
+    image: "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?q=80&w=387&auto=format&fit=crop",
     images: [
       "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?q=80&w=387&auto=format&fit=crop",
     ],
@@ -81,6 +86,7 @@ export const mockData = [
     price: 49.99,
     discountPrice: 40.99,
     stock: 25,
+    image: "https://assets.unileversolutions.com/v1/130942459.jpg",
     images: ["https://assets.unileversolutions.com/v1/130942459.jpg"],
     categoryId: {
       _id: "cat-kids",
@@ -94,6 +100,7 @@ export const mockData = [
     price: 49.99,
     discountPrice: 45.99,
     stock: 10,
+    image: "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?q=80&w=388&auto=format&fit=crop",
     images: [
       "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?q=80&w=388&auto=format&fit=crop",
     ],
@@ -109,6 +116,7 @@ export const mockData = [
     price: 49.99,
     discountPrice: 47.99,
     stock: 12,
+    image: "https://images.unsplash.com/photo-1589254065909-b7086229d08c?q=80&w=387&auto=format&fit=crop",
     images: [
       "https://images.unsplash.com/photo-1589254065909-b7086229d08c?q=80&w=387&auto=format&fit=crop",
     ],
@@ -124,6 +132,7 @@ export const mockData = [
     price: 49.99,
     discountPrice: 48.99,
     stock: 18,
+    image: "https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?q=80&w=464&auto=format&fit=crop",
     images: [
       "https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?q=80&w=464&auto=format&fit=crop",
     ],
@@ -139,6 +148,7 @@ export const mockData = [
     price: 49.99,
     discountPrice: 49.0,
     stock: 20,
+    image: "https://images.unsplash.com/photo-1759572095384-1a7e646d0d4f?q=80&w=327&auto=format&fit=crop",
     images: [
       "https://images.unsplash.com/photo-1759572095384-1a7e646d0d4f?q=80&w=327&auto=format&fit=crop",
     ],
