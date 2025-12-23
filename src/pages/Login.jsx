@@ -12,64 +12,24 @@ function Login({ openSignUp }) {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:8008/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      });
+      // Mock Login Success
+      const mockToken = "mock-token-123456";
+      const mockUser = {
+        _id: "mock-user-id",
+        name: "Mock User",
+        email: email,
+        token: mockToken,
+      };
 
-      const data = await res.json();
+      localStorage.setItem("token", mockToken);
+      localStorage.setItem("user", JSON.stringify(mockUser));
 
-      if (!res.ok) {
-        throw new Error(data.message || "Login failed");
-      }
-
-      // ✅ خزّن التوكن
-      localStorage.setItem("token", data.token);
-
-      // ✅ استخرج userId من التوكن أو من data.user
-      let userId = null;
-      if (data.user && (data.user._id || data.user.id)) {
-        userId = data.user._id || data.user.id;
-      } else {
-        // استخرج userId من التوكن
-        try {
-          if (data.token && data.token.split(".").length === 3) {
-            const payload = JSON.parse(atob(data.token.split(".")[1]));
-            userId =
-              payload?.id ||
-              payload?._id ||
-              payload?.userId ||
-              payload?.sub ||
-              payload?.user_id;
-          }
-        } catch (err) {
-          console.warn("Failed to extract userId from token:", err);
-        }
-      }
-
-      // ✅ خزّن بيانات المستخدم
-      if (userId) {
-        const userData = data.user
-          ? { ...data.user, token: data.token }
-          : {
-              _id: userId,
-              id: userId,
-              token: data.token,
-              email: data.email || email,
-            };
-        localStorage.setItem("user", JSON.stringify(userData));
-      }
-
-      // ✅ اقفل المودال واعمل ريفريش
-      window.location.reload();
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
     } catch (err) {
-      setError(err.message);
+      console.error(err);
+      setError("An unexpected error occurred");
     } finally {
       setLoading(false);
     }

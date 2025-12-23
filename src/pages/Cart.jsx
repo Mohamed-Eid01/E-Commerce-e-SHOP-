@@ -1,207 +1,33 @@
 // Cart.jsx
-import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FaTrashAlt } from "react-icons/fa";
 import EmptyCart from "../assets/Images/emptycart.png";
-import { setCart } from "../redux/cartSlice";
-import * as api from "../redux/api/cartApi";
-import LoginModal from "../comonents/LoginModal";
+import {
+  removeFromCart,
+  increaseQuantity,
+  decreaseQuantity,
+} from "../redux/cartSlice";
 
 function Cart() {
   const dispatch = useDispatch();
   const { products, totalQuantity, totalPrice } = useSelector(
     (state) => state.cart
   );
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
-  // Helper to get user data
-  const getUser = () => {
-    try {
-      // First, try to get user object from localStorage
-      const userStr = localStorage.getItem("user");
-      if (userStr) {
-        const user = JSON.parse(userStr);
-        if (user && (user._id || user.id) && user.token) {
-          return user;
-        }
-      }
-
-      // Fallback: check if token exists and try to get userId from token
-      const token = localStorage.getItem("token");
-      if (token && token.trim()) {
-        try {
-          // Decode JWT token to get userId
-          const parts = token.split(".");
-          if (parts.length === 3) {
-            const payload = JSON.parse(atob(parts[1]));
-            const userId =
-              payload?.id ||
-              payload?._id ||
-              payload?.userId ||
-              payload?.sub ||
-              payload?.user_id;
-            if (userId) {
-              // Create user object from token
-              return {
-                _id: userId,
-                id: userId,
-                token: token.trim(),
-              };
-            }
-          }
-        } catch (e) {
-          console.warn("Failed to decode token:", e);
-        }
-      }
-      return null;
-    } catch (err) {
-      console.error("Error getting user:", err);
-      return null;
-    }
-  };
-
-  // Check if user is logged in
-  const isLoggedIn = () => {
-    // Simple check: if token exists, consider logged in
-    const token = localStorage.getItem("token");
-    if (token && token.trim()) {
-      const user = getUser();
-      // If we can get user data, use it; otherwise just having token is enough
-      if (user && (user._id || user.id)) {
-        return true;
-      }
-      // Even if we can't decode userId, if token exists, try to use it
-      // The API will validate the token
-      return true;
-    }
-    return false;
-  };
-
-  // Fetch cart data
-  useEffect(() => {
-    if (!isLoggedIn()) return;
-
-    const user = getUser();
-    if (!user || !user._id || !user.token) {
-      console.warn("User data incomplete, cannot fetch cart");
-      return;
-    }
-
-    const fetchCart = async () => {
-      try {
-        const data = await api.getCart(user._id, user.token.trim());
-        dispatch(
-          setCart({
-            products: data.products || [],
-            totalQuantity: data.totalQuantity || 0,
-            totalPrice: data.totalPrice || 0,
-          })
-        );
-      } catch (err) {
-        console.error("Failed to fetch cart:", err);
-      }
-    };
-    fetchCart();
-  }, [dispatch]);
-
-  // Update cart after modification
-  const refreshCart = async () => {
-    if (!isLoggedIn()) return;
-    const user = getUser();
-    if (!user || !user._id || !user.token) {
-      console.warn("User data incomplete, cannot refresh cart");
-      return;
-    }
-    try {
-      const data = await api.getCart(user._id, user.token.trim());
-      dispatch(
-        setCart({
-          products: data.products || [],
-          totalQuantity: data.totalQuantity || 0,
-          totalPrice: data.totalPrice || 0,
-        })
-      );
-    } catch (err) {
-      console.error("Failed to refresh cart:", err);
-    }
-  };
 
   // Increase quantity
-  const handleIncrease = async (productId, currentQty) => {
-    if (!isLoggedIn()) {
-      setIsLoginModalOpen(true);
-      return;
-    }
-    const user = getUser();
-    if (!user || !user._id) {
-      setIsLoginModalOpen(true);
-      return;
-    }
-    try {
-      await api.updateCartItem(
-        user._id,
-        user.token.trim(),
-        productId,
-        currentQty + 1
-      );
-      await refreshCart();
-    } catch (err) {
-      console.error("Failed to increase quantity:", err);
-      // If API call fails due to auth, show login modal
-      if (err.message?.includes("401") || err.message?.includes("token")) {
-        setIsLoginModalOpen(true);
-      }
-    }
+  const handleIncrease = (productId) => {
+    dispatch(increaseQuantity(productId));
   };
 
   // Decrease quantity
-  const handleDecrease = async (productId, currentQty) => {
-    if (!isLoggedIn()) {
-      setIsLoginModalOpen(true);
-      return;
-    }
-    if (currentQty <= 1) return;
-    const user = getUser();
-    if (!user || !user._id) {
-      setIsLoginModalOpen(true);
-      return;
-    }
-    try {
-      await api.updateCartItem(
-        user._id,
-        user.token.trim(),
-        productId,
-        currentQty - 1
-      );
-      await refreshCart();
-    } catch (err) {
-      console.error("Failed to decrease quantity:", err);
-      if (err.message?.includes("401") || err.message?.includes("token")) {
-        setIsLoginModalOpen(true);
-      }
-    }
+  const handleDecrease = (productId, currentQty) => {
+    dispatch(decreaseQuantity(productId));
   };
 
   // Remove item
-  const handleRemove = async (productId) => {
-    if (!isLoggedIn()) {
-      setIsLoginModalOpen(true);
-      return;
-    }
-    const user = getUser();
-    if (!user || !user._id) {
-      setIsLoginModalOpen(true);
-      return;
-    }
-    try {
-      await api.removeCartItem(user._id, user.token.trim(), productId);
-      await refreshCart();
-    } catch (err) {
-      console.error("Failed to remove item:", err);
-      if (err.message?.includes("401") || err.message?.includes("token")) {
-        setIsLoginModalOpen(true);
-      }
-    }
+  const handleRemove = (productId) => {
+    dispatch(removeFromCart(productId));
   };
 
   if (!products || products.length === 0) {
@@ -288,20 +114,6 @@ function Cart() {
         </div>
       </div>
 
-      {/* Login Modal */}
-      {isLoginModalOpen && (
-        <LoginModal
-          onClose={() => setIsLoginModalOpen(false)}
-          onLoginSuccess={(userData) => {
-            localStorage.setItem("user", JSON.stringify(userData));
-            setIsLoginModalOpen(false);
-            // Refresh cart after login
-            setTimeout(() => {
-              window.location.reload();
-            }, 500);
-          }}
-        />
-      )}
     </div>
   );
 }
