@@ -1,5 +1,6 @@
 // Cart.jsx
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { FaTrashAlt } from "react-icons/fa";
 import EmptyCart from "../assets/Images/emptycart.png";
 import {
@@ -10,6 +11,7 @@ import {
 
 function Cart() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { products, totalQuantity, totalPrice } = useSelector(
     (state) => state.cart
   );
@@ -112,7 +114,7 @@ function Cart() {
             <span className="text-red-600">${totalPrice.toFixed(2)}</span>
           </div>
           <button 
-            onClick={() => alert('Checkout functionality coming soon!')}
+            onClick={() => navigate('/checkout')}
             className="w-full bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition-colors duration-300"
           >
             Proceed to Checkout
