@@ -8,7 +8,7 @@ function CategoryPage() {
   const products = useSelector((state) => state.product.products);
 
   const filteredProducts = products.filter(
-    (product) => product.category.toLowerCase() === category.toLowerCase()
+    (product) => product.categoryId.name.toLowerCase() === category.toLowerCase()
   );
 
   return (
