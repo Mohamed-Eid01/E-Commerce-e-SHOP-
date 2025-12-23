@@ -39,7 +39,7 @@ function ProductCard({ product }) {
         <div className="p-4 space-y-2">
           {/* Category */}
           <p className="text-xs text-gray-400 uppercase tracking-wide">
-            {product.category || "General"}
+            {product.categoryId.name || "General"}
           </p>
 
           {/* Name */}

@@ -12,7 +12,7 @@ export const mockData = [
     ],
     categoryId: {
       _id: "cat-men",
-      name: "men",
+      name: "women",
     },
   },
   {
@@ -28,7 +28,7 @@ export const mockData = [
     ],
     categoryId: {
       _id: "cat-men",
-      name: "men",
+      name: "women",
     },
   },
   {
@@ -60,7 +60,7 @@ export const mockData = [
     ],
     categoryId: {
       _id: "cat-men",
-      name: "men",
+      name: "kids",
     },
   },
   {
@@ -76,7 +76,7 @@ export const mockData = [
     ],
     categoryId: {
       _id: "cat-kids",
-      name: "kids",
+      name: "men",
     },
   },
   {
@@ -90,7 +90,7 @@ export const mockData = [
     images: ["https://assets.unileversolutions.com/v1/130942459.jpg"],
     categoryId: {
       _id: "cat-kids",
-      name: "kids",
+      name: "men",
     },
   },
   {
@@ -106,7 +106,7 @@ export const mockData = [
     ],
     categoryId: {
       _id: "cat-kids",
-      name: "kids",
+      name: "men",
     },
   },
   {
@@ -122,7 +122,7 @@ export const mockData = [
     ],
     categoryId: {
       _id: "cat-women",
-      name: "women",
+      name: "kids",
     },
   },
   {
@@ -138,7 +138,7 @@ export const mockData = [
     ],
     categoryId: {
       _id: "cat-women",
-      name: "women",
+      name: "men",
     },
   },
   {
@@ -154,7 +154,7 @@ export const mockData = [
     ],
     categoryId: {
       _id: "cat-women",
-      name: "women",
+      name: "men",
     },
   },
 ];
